@@ -2,32 +2,43 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import {Card} from './components/Card'
+import {Input} from './components/Input'
+
+const initGeneralInputList = [
+  {id: 1, label:"Name", type:"text", value:""},
+  {id: 2, label: "E-mail", type:"email", value:""},
+  {id: 3, label:"Birthdate", type:"date", value:new Date().toISOString().split("T")[0]},
+]   
+
+const initEducationInputList = [
+  {id:4, label:"School Name", type:"text", value:""},
+]
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  // const [count, setCount] = useState(0)
+  const [generalDone, setGeneralDone] = useState(false)
+  const [educationDone, setEducationDone] = useState(false)
+  const [practicalDone, setPracticalDone] = useState(false)
+  const [generalInputList, setGeneralInputList] = useState(initGeneralInputList)
+  const [educationInputList, setEducationInputList] = useState(initEducationInputList)
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Card name="General Information">
+          <Input 
+          inputList = {generalInputList}
+          setInputList={setGeneralInputList}
+          done = {generalDone}
+          setDone = {setGeneralDone}/>
+      </Card>
+      <Card name="Education">
+          <Input 
+          inputList= {educationInputList}
+          setInputList={setEducationInputList}
+          done = {educationDone}
+          setDone= {setEducationDone}
+          />
+      </Card>
     </>
   )
 }
